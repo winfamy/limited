@@ -15,7 +15,8 @@ class RobloxAPI {
 
     public function getInventory($user_id) {
         $resp = $this->client->request('GET', $this->root . '/inventory/' . (string)$user_id);
-        dd((string)$resp->getBody());
+        $json = json_decode($resp->getBody(), true);
+        return $json;
     }
 
 }
