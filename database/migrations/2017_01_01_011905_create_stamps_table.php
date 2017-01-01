@@ -17,7 +17,7 @@ class CreateStampsTable extends Migration
             $table->increments('id');
 
             $table->string('type');
-            $table->integer('model_id');
+            $table->integer('object_id');
             $table->integer('value');
 
             $table->timestamps();
