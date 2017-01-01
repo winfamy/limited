@@ -12,6 +12,8 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function test(\App\Library\RobloxAPI $api) {
-        return \Cache::pull('inventory.261');
+        //dd($api->getInventory(261));
+        //ss\Cache::put('inventory.261', $api->getInventory(261), 5);
+        return dd(\Cache::pull('inventory.261'));
     }
 }
