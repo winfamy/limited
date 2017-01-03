@@ -18,3 +18,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::post('bot/inventory/item', 'Bot\\InventoryController@item');
+Route::post('bot/inventory/owners', 'Bot\\InventoryController@owners');

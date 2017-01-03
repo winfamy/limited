@@ -20,5 +20,6 @@ class InventoryController extends Controller
                     'object_id' => $request->user_id
                 ]);
         }
+        return 'megalul';
     }
 }

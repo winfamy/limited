@@ -9,9 +9,11 @@ class Crawler {
            Inventory.getLimiteds().then((items) => {
                var done = items.length;
                items.forEach((item) => {
-                   this.handle(item.id).then(() => {
-                       if(!--done) resolve();
-                   });
+                    if(item.rap > 10000) {
+                        this.handle(item.id).then(() => {
+                            if(!--done) resolve();
+                        });
+                    }
                });
            });
         });
@@ -19,13 +21,18 @@ class Crawler {
 
     handle(item_id) {
         return new Promise((resolve, reject) => {
-            resolve();
+            Inventory.getAssetOwners(item_id).then((owners) => {
+                Axios.post("http://localhost/api/bot/", {
+                    owners: owners
+                }).then((response) => {
+                    console.log(response);
+                }).catch((err) => { console.log(err); });
+            });
         });
     }
 
     start() {
         this.run().then(() => {
-            console.log('yas');
             this.start();
         });
     }
@@ -33,6 +40,4 @@ class Crawler {
 
 
 new Crawler().start();
-
-console.log('done');
 
