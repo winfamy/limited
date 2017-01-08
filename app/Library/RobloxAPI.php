@@ -19,6 +19,14 @@ class RobloxAPI {
         return $json;
     }
 
+    public function getUserId($username) {
+        $resp = $this->client->request('GET', "http://api.roblox.com/users/get-by-username?username=$username");
+        $json = json_decode($resp->getBody(), true);
+        return (!isset($json['success']))
+               ? $json['Id']
+               : null;
+    }
+
 }
 
  ?>

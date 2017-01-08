@@ -4,6 +4,7 @@ namespace App\Library;
 
 use App\Stamp;
 use App\Library\RobloxAPI;
+use App\Item;
 use Cache;
 
 class InventoryHandler {
@@ -21,10 +22,21 @@ class InventoryHandler {
         }
     }
 
-    public static function pull(RobloxAPI $api, $user_id) {
-        if(!is_null($cached = Cache::pull('inventory.' . (string)$user_id)))
-            return $cached;
-        return $api->getInventory($user_id);
+    public static function pull($user_id) {
+        $api = resolve('App\Library\RobloxAPI');
+        //if(!is_null($cached = Cache::get("inventory.$user_id")))
+        //    return $cached;
+        $items = $api->getInventory($user_id);
+        Cache::put("inventory.$user_id", $items, 5);
+        $resp = [];
+
+        foreach($items as $item) {
+            $id = (int)Item::getID($item['link']);
+            $roblox_item = Item::where('item_id', $id)->first();
+            $resp[] = $roblox_item;
+        }
+
+        return $resp;
     }
 
 }

@@ -167,9 +167,8 @@ return [
          * Package Service Providers...
          */
         App\Providers\RobloxAPIProvider::class,
-
-        //
-
+        Jenssegers\Mongodb\MongodbServiceProvider::class,        
+        
         /*
          * Application Service Providers...
          */

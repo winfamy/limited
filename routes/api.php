@@ -19,3 +19,4 @@ Route::get('/user', function (Request $request) {
 
 Route::post('bot/inventory/item', 'Bot\\InventoryController@item');
 Route::post('bot/inventory/owners', 'Bot\\InventoryController@owners');
+Route::get('/inventory/{username}', 'API\\InventoryController@get');

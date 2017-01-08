@@ -2,9 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Group extends Model
+class Group extends Eloquent
 {
-    //
+
+    protected $fillable = [
+        'group_id', 'name', 'body', 'owner_id'
+    ];
+
 }

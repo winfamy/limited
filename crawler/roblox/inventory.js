@@ -71,17 +71,18 @@ var API = {
     getAssetOwners: (asset_id) => {
         return new Promise((resolve, reject) => {
             var owners = [];
+            var pages = 0;
             function getPage(asset_id, page_cursor, attempts) {
-                console.log(owners.length);
                 var url = "https://inventory.roblox.com/v1/assets/"+asset_id.toString()+"/owners?sortOrder=Asc&limit=100" + (page_cursor?"&cursor=" + page_cursor:"");
                 Axios.get(url).then((response) => {
+                    if(attempts == 1) pages++;
+                    console.log(pages);
                     return (response.data.nextPageCursor == null)
-                        ? push(response.data, () => { resolve(owners); })
+                        ? push(response.data, () => { resolve([owners, pages]); })
                         : push(response.data, () => { getPage(asset_id, response.data.nextPageCursor, 1); });
                 })
                 .catch((err) => {
-                    console.log(err);
-                    return (attempts == 3) ? resolve(owners) : getPage(asset_id, page_cursor, attempts+1);
+                    return (attempts == 3) ? resolve([owners, pages]) : getPage(asset_id, page_cursor, attempts+1);
                 });
             }
 
@@ -90,7 +91,7 @@ var API = {
                 json.data.forEach(function(item) {
                     if(item.owner != null)
                         owners.push({
-                            uaid: item.userAssetID,
+                            uaid: item.userAssetId,
                             serial: item.serialNumber,
                             owner: item.owner.userId
                         });

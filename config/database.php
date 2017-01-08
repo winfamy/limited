@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,18 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
-
+        
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'host'   => env('DB_HOST', 'localhost'),
+            'port'   => env('DB_PORT', '27017'),
+            'database' => env('DB_DATABASE', 'limited'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+            'options' => [
+                'database' => 'limited'
+            ]
+        ]
     ],
 
     /*

@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Stamp extends Model
+class Stamp extends Eloquent
 {
     protected $fillable = ['type', 'object_id', 'value'];
 

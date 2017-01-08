@@ -1,2 +1,2 @@
 require('babel-register');
-require('./handler/crawler.js');
+require('./handler/pageCounter.js');
