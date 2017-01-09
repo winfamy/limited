@@ -27,6 +27,13 @@ class RobloxAPI {
                : null;
     }
 
+    public function getImage($roblox_item_id) {
+        $http = new Client();
+        $resp = $http->request('GET', 'https://www.roblox.com/thumbnail/asset?assetId='. (string)$roblox_item_id .'&thumbnailFormatId=254&width=420&height=420');
+        preg_match("/class='' src='(.*)' \/>/", (string)$resp->getBody(), $matches);
+        return $matches[1];
+    }
+
 }
 
  ?>
