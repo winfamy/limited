@@ -24,31 +24,26 @@ class InventoryHandler {
 
     public static function pull($user_id) {
         $api = resolve('App\Library\RobloxAPI');
-        //if(!is_null($cached = Cache::get("inventory.$user_id")))
-            //return $cached;
+        if(!is_null($cached = Cache::get("inventory.$user_id")))
+            return $cached;
         $items = $api->getInventory($user_id);
         $resp = [];
 
-        foreach($items as $item) {
+        $items_unique = collect($items)->unique('name')->sortByDesc('rap')->values()->all();
+        foreach ($items_unique as &$item) {
             $id = (int)Item::getID($item['link']);
-
             if(!is_null( $image = Cache::get("image.$id") )) {
                 $item['img'] = $image;
-                continue;
+                \Log::debug("Item cached for $id");
             }
-
-            $item['img'] = $api->getImage($id);
-            if(!isset($resp[$id])) {
-                $resp[$id] = $item;
-                $resp[$id]['count'] = 1;
+            else {
+                $item['img'] = $api->getImage($id);
             }
-            else
-                $resp[$id]['count']++;
-
+            
+            $item['count'] = collect($items)->where('name', $item['name'])->count();
         }
-        $resp = collect($resp)->sortByDesc('rap')->all();
-        Cache::put("inventory.$user_id", $resp, 5);
-        return $resp;
+        Cache::put("inventory.$user_id", $items_unique, 5);
+        return $items_unique;
     }
 
 }

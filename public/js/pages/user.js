@@ -14,29 +14,23 @@ $(document).ready(function() {
                 '</div>' +
             '</div>';
 
-    axios.get('/api/inventory/' + config.username, {transformResponse: []})
+    axios.get('/api/inventory/' + config.username)
         .then(function(response) {
             var html_strings = [];
-            try {
-                ids = Object.keys(response.data);
-
-                for (var i = 0; i < ids.length; i++) {
-                    properties = Object.keys(response.data[ids[i]])
-                    var replaced = html;
-                    for (var j = 0; j < properties.length; j++) {
-                        console.log(`%${properties[j]}%`);
-                        replaced = replaced.replace(`%${properties[j]}%`, response.data[ids[i]][properties[j]]);
-                        console.log(replaced);
-                    }                    
-                    html_strings.push(replaced);
-                } 
-            } catch(err) {
-                console.log(err);
+            console.log(response.data);
+            for (var i = 0; i < response.data.length; i++) {
+                var element = response.data[i];
+                var replaced = html;
+                for (var j = 0; j < Object.keys(element).length; j++) {
+                    replaced = replaced.replace(`%${Object.keys(element)[j]}%`, element[Object.keys(element)[j]]);
+                }
+                html_strings.push(replaced);
             }
 
             for (var i = 0; i < html_strings.length; i++) {
                 $('#inventory').first('.row').append(html_strings[i]);
             }
+
             $('.wrapper').fadeOut(400, function() {
                 //$('#inventory').fadeIn(400, function() {
                     $('#inventory').toggleClass('active');

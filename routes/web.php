@@ -16,5 +16,5 @@ Route::get('/test', 'Controller@test');
 Route::get('/', 'Client\HomeController@root');
 Route::post('/search', 'Client\SearchController@search');
 Route::get('/u/{username}', function($username) {
-    return view('client.user');
+    return view('client.user', ['user' => $username]);
 });

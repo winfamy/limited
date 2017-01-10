@@ -2,7 +2,7 @@
 
 @section('body')
 <div class="content__header">
-    <h2>Shedletsky</h2>
+    <h2>{{ $user }}</h2>
 </div>
 <div id="">
     <div class="action-header action-header--dark">
