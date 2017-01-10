@@ -32,13 +32,13 @@ class InventoryHandler {
         $items_unique = collect($items)->unique('name')->sortByDesc('rap')->values()->all();
         foreach ($items_unique as &$item) {
             $id = (int)Item::getID($item['link']);
-            if(!is_null( $image = Cache::get("image.$id") )) {
+            /* if(!is_null( $image = Cache::get("image.$id") )) {
                 $item['img'] = $image;
                 \Log::debug("Item cached for $id");
             }
             else {
                 $item['img'] = $api->getImage($id);
-            }
+            } */
             
             $item['count'] = collect($items)->where('name', $item['name'])->count();
         }
