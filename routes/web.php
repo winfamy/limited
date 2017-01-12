@@ -19,6 +19,7 @@ Route::get('/u/{username}', function($username) {
     return view('client.user', ['user' => $username]);
 });
 Route::get('login', 'Auth\\LoginController@root');
+Route::post('login', 'Auth\\LoginController@login');
 Route::get('register', 'Auth\\RegisterController@root');
 Route::post('register', 'Auth\\RegisterController@register');
 Route::get('confirm', 'Auth\\RegisterController@confirm');

@@ -33,28 +33,30 @@
                             <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
 
                             <ul class="dropdown-menu pull-right">
-                                <li><a data-block="#l-register" href="">Create an account</a></li>
-                                <li><a data-block="#l-forget-password" href="">Forgot password?</a></li>
+                                <li><a data-block="#l-register" id="#register" href="">Create an account</a></li>
+                                <li><a data-block="#l-forget-password" id="#recover" href="">Forgot password?</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="login__block__body">
-                    {{ csrf_field() }}
-                    <div class="form-group form-group--float form-group--centered form-group--centered">
-                        <input type="text" class="form-control" name="name">
-                        <label>ROBLOX Account</label>
-                        <i class="form-group__bar"></i>
-                    </div>
+                    <form action="/login" method="post">                    
+                        {{ csrf_field() }}
+                        <div class="form-group form-group--float form-group--centered form-group--centered">
+                            <input type="text" class="form-control" name="name">
+                            <label>ROBLOX Account</label>
+                            <i class="form-group__bar"></i>
+                        </div>
 
-                    <div class="form-group form-group--float form-group--centered form-group--centered">
-                        <input type="password" class="form-control" name="password">
-                        <label>Password</label>
-                        <i class="form-group__bar"></i>
-                    </div>
+                        <div class="form-group form-group--float form-group--centered form-group--centered">
+                            <input type="password" class="form-control" name="password">
+                            <label>Password</label>
+                            <i class="form-group__bar"></i>
+                        </div>
 
-                    <button class="btn btn--light btn--icon m-t-15"><i class="zmdi zmdi-long-arrow-right"></i></button>
+                        <button class="btn btn--light btn--icon m-t-15" onclick="$(this).closest('form').submit()"><i class="zmdi zmdi-long-arrow-right"></i></button>
+                    </form>
                 </div>
             </div>
 
@@ -69,8 +71,8 @@
                             <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
 
                             <ul class="dropdown-menu pull-right">
-                                <li><a data-block="#l-login" href="">Already have an account?</a></li>
-                                <li><a data-block="#l-forget-password" href="">Forgot password?</a></li>
+                                <li><a data-block="#l-login" id="#login" href="">Already have an account?</a></li>
+                                <li><a data-block="#l-forget-password" id="#recover" href="">Forgot password?</a></li>
                             </ul>
                         </div>
                     </div>
@@ -120,11 +122,11 @@
 
                     <div class="actions login__block__actions">
                         <div class="dropdown">
-                            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
+                            <a data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
 
                             <ul class="dropdown-menu pull-right">
-                                <li><a data-block="#l-login" href="">Already have an account?</a></li>
-                                <li><a data-block="#l-register" href="">Create an account</a></li>
+                                <li><a data-block="#l-login" id="#login" href="">Already have an account?</a></li>
+                                <li><a data-block="#l-register" id="#register" href="">Create an account</a></li>
                             </ul>
                         </div>
                     </div>
@@ -204,6 +206,7 @@
 
         <!-- Site Functions & Actions -->
         <script src="/js/app.min.js"></script>
+        <script src="/js/pages/auth.js"></script>
 
         @if (count($errors) > 0)
             <script type="text/javascript">

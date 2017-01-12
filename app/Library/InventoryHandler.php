@@ -2,9 +2,12 @@
 
 namespace App\Library;
 
-use App\Stamp;
 use App\Library\RobloxAPI;
+use App\Http\Jobs\Inventory\Save;
+
+use App\Stamp;
 use App\Item;
+
 use Cache;
 
 class InventoryHandler {
@@ -35,6 +38,7 @@ class InventoryHandler {
             $item['count'] = collect($items)->where('name', $item['name'])->count();
         }
         Cache::put("inventory.$user_id", $items_unique, 5);
+        //dispatch(new Save($items));
         return $items_unique;
     }
 

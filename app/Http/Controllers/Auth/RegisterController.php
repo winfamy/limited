@@ -59,7 +59,7 @@ class RegisterController extends Controller
         $user = User::create([
             'roblox_user_id' => $token->user_id,
             'name' => session('name'),
-            'password' => \Hash::make(session('password')),
+            'password' => session('password'),
             'roles' => [],
             'verified' => 1
         ]);

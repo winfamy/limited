@@ -58,51 +58,6 @@
                 <li class="top-menu__trigger hidden-lg hidden-md">
                     <a href=""><i class="zmdi zmdi-search"></i></a>
                 </li>
-
-                <li class="top-menu__apps dropdown hidden-xs hidden-sm">
-                    <!--  <a data-toggle="dropdown" href="">
-                        <i class="zmdi zmdi-apps"></i>
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="">
-                                <i class="zmdi zmdi-calendar"></i>
-                                <small>Calendar</small>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="">
-                                <i class="zmdi zmdi-file-text"></i>
-                                <small>Files</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="zmdi zmdi-email"></i>
-                                <small>Mail</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="zmdi zmdi-trending-up"></i>
-                                <small>Analytics</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="zmdi zmdi-view-headline"></i>
-                                <small>News</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="zmdi zmdi-image"></i>
-                                <small>Gallery</small>
-                            </a>
-                        </li>
-                    </ul> -->
-                </li>
                 <li class="dropdown hidden-xs">
                     <a data-toggle="dropdown" href=""><i class="zmdi zmdi-more-vert"></i></a>
                     <ul class="dropdown-menu dropdown-menu--icon pull-right">
@@ -318,9 +273,6 @@
                 </div>
 
                 <div class="navigation__toggles">
-                    <a href="" class="active" data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__messages">
-                        <i class="zmdi zmdi-email"></i>
-                    </a>
                     <a href="" data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__updates">
                         <i class="zmdi zmdi-notifications"></i>
                     </a>

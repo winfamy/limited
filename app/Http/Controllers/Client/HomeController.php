@@ -8,6 +8,6 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     public function root() {
-        return view('layout/example');
+        return view('layout/master');
     }
 }

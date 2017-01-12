@@ -12,6 +12,10 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function test() {
-        dd(\Auth::user()->roblox_user_id);
+        $stamp = \App\Stamp::create([
+            'type' => 'uaid',
+            'object_id' => 12345,
+            'value' => 12345
+        ]);
     }
 }
