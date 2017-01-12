@@ -11,8 +11,12 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function test(\App\Library\RobloxAPI $api) {
-        $group = \App\Group::where('group_id', 1)->get();
-        dd($group);
+    public function test() {
+        session([
+            'name' => '$request->name',
+            'password' => '$request->password',
+            'token' => '$token->token'
+        ]);;
+        dd(session()->all());
     }
 }

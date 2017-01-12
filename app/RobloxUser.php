@@ -20,12 +20,14 @@ class RobloxUser extends Eloquent {
     public static function fetch($username) {
         $api = resolve('App\Library\RobloxAPI');
         $id = $api->getUserId($username);
-        return RobloxUser::firstOrNew([
-            'name' => $username,
-            'user_id' => $id,
-            'names' => [],
-            'posts' => 0,
-            'joined_at' => null
-        ]);
+        return (!is_null($id)) ? 
+            RobloxUser::firstOrNew([
+                'name' => $username,
+                'user_id' => $id,
+                'names' => [],
+                'posts' => 0,
+                'joined_at' => null
+            ])
+        : null;
     }
 }

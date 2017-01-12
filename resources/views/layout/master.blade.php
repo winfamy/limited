@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Material Admin</title>
+        <title>RBX.Limited</title>
 
         <!-- Vendors -->
 
@@ -60,7 +60,7 @@
                 </li>
 
                 <li class="top-menu__apps dropdown hidden-xs hidden-sm">
-                    <a data-toggle="dropdown" href="">
+                    <!--  <a data-toggle="dropdown" href="">
                         <i class="zmdi zmdi-apps"></i>
                     </a>
                     <ul class="dropdown-menu pull-right">
@@ -101,7 +101,7 @@
                                 <small>Gallery</small>
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <li class="dropdown hidden-xs">
                     <a data-toggle="dropdown" href=""><i class="zmdi zmdi-more-vert"></i></a>

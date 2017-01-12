@@ -18,3 +18,6 @@ Route::post('/search', 'Client\SearchController@search');
 Route::get('/u/{username}', function($username) {
     return view('client.user', ['user' => $username]);
 });
+Route::get('login', 'Auth\\LoginController@root');
+Route::get('register', 'Auth\\RegisterController@root');
+Route::get('confirm', 'Auth\\RegisterController@confirm');

@@ -2,70 +2,67 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\Auth\RegisterRequest;
+
+use App\RobloxUser;
+use App\User;
+
+use Hash;
+use Auth;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
+    public function root() {
+        return view('client.auth.auth', ['register' => true]);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+    public function register(RegisterRequest $request) {
+        $roblox_user = RobloxUser::where('name', $request->name)->first();
+        if(is_null($roblox_user)) {
+            if(is_null( $roblox_user = RobloxUser::fetch($request->name) ))
+                return redirect()->back()->withErrors(['ROBLOX username invalid. :(']);
+        }
+
+        $token = Token::create([
+            'type' => 'connect',
+            'user_id' => $roblox_user->user_id,
+            'token' => str_random(8)
         ]);
+
+        session([
+            'name' => $request->name,
+            'password' => $request->password,
+            'token' => $token->token
+        ]);
+
+        return redirect('/confirm');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+    public function confirm(Request $request) {
+        if(is_null(session('token')))
+            return redirect('/register');
+        return view('client.auth.confirm', ['token' => session('token')]);
+    }
+
+    public function check(Request $request) {
+        if(is_null(session('token')))
+            return response()->json(['status' => false, 'msg' => 'No token saved, restart registration.']);
+
+        $token = Token::where('token', session('token'))->first();
+        if( $api->getStatus($token->user_id) != session('token') )
+            return response()->json(['status' => false, 'msg' => 'Verification failed']);
+        
+        $user = User::create([
+            'roblox_user_id' => $token->user_id,
+            'name' => session('name'),
+            'password' => \Hash::make(session('password')),
+            'roles' => [],
+            'verified' => 1
         ]);
+        Auth::login($user, true);
+        
+        return response()->json(['status' => true]);
     }
 }

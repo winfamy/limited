@@ -34,6 +34,18 @@ class RobloxAPI {
         return $matches[1];
     }
 
+    public function getStatus($roblox_user_id) {
+        $http = new Client();
+
+        $resp = $http->request('GET', "https://www.roblox.com/users/".(string)$roblox_user_id."/profile");
+        $body = $resp->getBody();
+
+        if($resp->getStatusCode() == 404)
+        return false;
+
+        preg_match('/data-statustext=\'(.*?)\'/s', $body, $matches);
+        return isset($matches[1]) ? $matches[1] : false;
+    }
 }
 
  ?>

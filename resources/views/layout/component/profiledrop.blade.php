@@ -5,7 +5,7 @@
     </li>
     @else
     <li>
-        <a href="profile-about.html"><i class="zmdi zmdi-account"></i>Login</a>
+        <a href="/login"><i class="zmdi zmdi-account"></i> Login</a>
     </li>
     @endif
 </ul>
