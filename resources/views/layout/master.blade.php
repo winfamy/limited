@@ -125,7 +125,11 @@
                 </li>
                 <li class="top-menu__profile dropdown">
                     <a data-toggle="dropdown" href="">
-                        <img src="https://placeholdit.imgix.net/~text?&w=300&h=300" alt="">
+                        @if(\Auth::check())
+                            <img src="https://www.roblox.com/bust-thumbnail/image?userId={{ \Auth::user()->roblox_user_id }}&width=420&height=420&format=png" alt="">
+                        @else
+                            <img src="https://placeholdit.imgix.net/~text?&w=300&h=300" alt="">
+                        @endif
                     </a>
 
                     @include('layout.component.profiledrop')
@@ -431,6 +435,12 @@
         <!-- Site Functions & Actions -->
         <script src="/js/app.min.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script>  
+            var axios = axios.create({
+                headers: {'XSRF-TOKEN': '{{ csrf_token() }}'}
+            });
+        </script>
 
         @yield('javascript')
     </body>

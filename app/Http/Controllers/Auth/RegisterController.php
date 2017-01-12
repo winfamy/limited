@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 
 use App\RobloxUser;
 use App\User;
+use App\Token;
 
 use Hash;
 use Auth;
@@ -43,10 +44,11 @@ class RegisterController extends Controller
     public function confirm(Request $request) {
         if(is_null(session('token')))
             return redirect('/register');
-        return view('client.auth.confirm', ['token' => session('token')]);
+        return view('client.auth.confirm', ['token' => session('token'), 'username' => session('name')]);
     }
 
     public function check(Request $request) {
+        $api = resolve('App\Library\RobloxAPI');
         if(is_null(session('token')))
             return response()->json(['status' => false, 'msg' => 'No token saved, restart registration.']);
 

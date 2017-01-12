@@ -17,6 +17,12 @@
 
         <!-- Site CSS -->
         <link href="/css/app-1.min.css" rel="stylesheet">
+
+        <script>
+            var config = {
+                token: '{{ $token }}'
+            }
+        </script>
     </head>
     
     <body>
@@ -31,94 +37,12 @@
                 </div>
 
                 <div class="login__block__body">
-                    <span>Put <span class="code" style="font-family:courier;">xxxxxxxxx</span> in the account status of<br> ROBLOX_USERNAME</span><br>
-                    <button class="btn btn--light btn--icon m-t-15"><i class="zmdi zmdi-long-arrow-right"></i></button>
+                    <span>Put <span class="code" style="font-family:courier;">{{ $token }}</span> in the account status of<br> {{ $username }}</span><br>
+                    <button class="btn btn--light btn--icon m-t-15" id="check"><i class="zmdi zmdi-long-arrow-right"></i></button>
                 </div>
             </div>
 
             <!-- Register -->
-            <div class="login__block" id="l-register">
-                <div class="login__block__header palette-Blue bg">
-                    <i class="zmdi zmdi-account-circle"></i>
-                    Create an account
-
-                    <div class="actions login__block__actions">
-                        <div class="dropdown">
-                            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-
-                            <ul class="dropdown-menu pull-right">
-                                <li><a data-block="#l-login" href="">Already have an account?</a></li>
-                                <li><a data-block="#l-forget-password" href="">Forgot password?</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="login__block__body">
-                    <div class="form-group form-group--float form-group--centered">
-                        <input type="text" class="form-control">
-                        <label>Name</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-
-                    <div class="form-group form-group--float form-group--centered">
-                        <input type="text" class="form-control">
-                        <label>Email Address</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-
-                    <div class="form-group form-group--float form-group--centered">
-                        <input type="password" class="form-control">
-                        <label>Password</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-
-                    <div class="input-centered">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                <i class="input-helper"></i>
-                                Accept the license agreement
-                            </label>
-                        </div>
-                    </div>
-
-                    <button class="btn btn--light btn--icon m-t-15"><i class="zmdi zmdi-plus"></i></button>
-                </div>
-            </div>
-
-            <!-- Forgot Password -->
-            <div class="login__block" id="l-forget-password">
-                <div class="login__block__header palette-Purple bg">
-                    <i class="zmdi zmdi-account-circle"></i>
-                    Forgot Password?
-
-                    <div class="actions login__block__actions">
-                        <div class="dropdown">
-                            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-
-                            <ul class="dropdown-menu pull-right">
-                                <li><a data-block="#l-login" href="">Already have an account?</a></li>
-                                <li><a data-block="#l-register" href="">Create an account</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="login__block__body">
-                    <p class="m-t-30">Lorem ipsum dolor fringilla enim feugiat commodo sed ac lacus.</p>
-
-                    <div class="form-group form-group--float form-group--centered">
-                        <input type="text" class="form-control">
-                        <label>ROBLOX Username</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-
-                    <button class="btn btn--light btn--icon m-t-15"><i class="zmdi zmdi-check"></i></button>
-                </div>
-            </div>
-        </div>
-
         <!-- Older IE Warning -->
         <!--[if lt IE 9]>
             <div class="ie-warning">
@@ -171,12 +95,29 @@
         <!-- Bootstrap -->
         <script src="/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+        <script src="/vendors/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
             <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
         <![endif]-->
 
         <!-- Site Functions & Actions -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
         <script src="/js/app.min.js"></script>
+
+        <script src="/js/pages/confirm.js"></script>
+
+        @if (count($errors) > 0)
+            <script type="text/javascript">
+                @foreach ($errors->all() as $error)
+                    $('body').notify({
+                        message: '{{ $error }}',
+                        type: 'danger'
+                    });
+                @endforeach
+            </script>
+        @endif
+
     </body>
 </html>

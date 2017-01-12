@@ -12,11 +12,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function test() {
-        session([
-            'name' => '$request->name',
-            'password' => '$request->password',
-            'token' => '$token->token'
-        ]);;
-        dd(session()->all());
+        dd(\Auth::user()->roblox_user_id);
     }
 }

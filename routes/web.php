@@ -20,4 +20,6 @@ Route::get('/u/{username}', function($username) {
 });
 Route::get('login', 'Auth\\LoginController@root');
 Route::get('register', 'Auth\\RegisterController@root');
+Route::post('register', 'Auth\\RegisterController@register');
 Route::get('confirm', 'Auth\\RegisterController@confirm');
+Route::post('check', 'Auth\\RegisterController@check');

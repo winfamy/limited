@@ -59,8 +59,8 @@
                     <a href=""><i class="zmdi zmdi-search"></i></a>
                 </li>
 
-                <!--<li class="top-menu__apps dropdown hidden-xs hidden-sm">
-                     <a data-toggle="dropdown" href="">
+                <li class="top-menu__apps dropdown hidden-xs hidden-sm">
+                    <!--  <a data-toggle="dropdown" href="">
                         <i class="zmdi zmdi-apps"></i>
                     </a>
                     <ul class="dropdown-menu pull-right">
@@ -101,8 +101,8 @@
                                 <small>Gallery</small>
                             </a>
                         </li>
-                    </ul> 
-                </li>-->
+                    </ul> -->
+                </li>
                 <li class="dropdown hidden-xs">
                     <a data-toggle="dropdown" href=""><i class="zmdi zmdi-more-vert"></i></a>
                     <ul class="dropdown-menu dropdown-menu--icon pull-right">
@@ -125,7 +125,11 @@
                 </li>
                 <li class="top-menu__profile dropdown">
                     <a data-toggle="dropdown" href="">
-                        <img src="https://placeholdit.imgix.net/~text?&w=300&h=300" alt="">
+                        @if(\Auth::check())
+                            <img src="https://www.roblox.com/bust-thumbnail/image?userId={{ \Auth::user()->roblox_user_id }}&width=420&height=420&format=png" alt="">
+                        @else
+                            <img src="https://placeholdit.imgix.net/~text?&w=300&h=300" alt="">
+                        @endif
                     </a>
 
                     @include('layout.component.profiledrop')
@@ -314,8 +318,11 @@
                 </div>
 
                 <div class="navigation__toggles">
+                    <a href="" class="active" data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__messages">
+                        <i class="zmdi zmdi-email"></i>
+                    </a>
                     <a href="" data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__updates">
-                        <i class="zmdi zmdi-notifications" data-toggle="tooltip" data-placement="top" data-title="" data-original-title"Add trade"></i>
+                        <i class="zmdi zmdi-notifications"></i>
                     </a>
                     <a href=""  data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__tasks">
                         <i class="zmdi zmdi-playlist-plus"></i>
@@ -428,6 +435,12 @@
         <!-- Site Functions & Actions -->
         <script src="/js/app.min.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script>  
+            var axios = axios.create({
+                headers: {'XSRF-TOKEN': '{{ csrf_token() }}'}
+            });
+        </script>
 
         @yield('javascript')
     </body>

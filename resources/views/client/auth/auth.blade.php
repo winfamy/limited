@@ -41,14 +41,15 @@
                 </div>
 
                 <div class="login__block__body">
+                    {{ csrf_field() }}
                     <div class="form-group form-group--float form-group--centered form-group--centered">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="name">
                         <label>ROBLOX Account</label>
                         <i class="form-group__bar"></i>
                     </div>
 
                     <div class="form-group form-group--float form-group--centered form-group--centered">
-                        <input type="password" class="form-control">
+                        <input type="password" class="form-control" name="password">
                         <label>Password</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -76,35 +77,38 @@
                 </div>
 
                 <div class="login__block__body">
-                    <div class="form-group form-group--float form-group--centered">
-                        <input type="text" class="form-control">
-                        <label>Name</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-
-                    <div class="form-group form-group--float form-group--centered">
-                        <input type="text" class="form-control">
-                        <label>Email Address</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-
-                    <div class="form-group form-group--float form-group--centered">
-                        <input type="password" class="form-control">
-                        <label>Password</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-
-                    <div class="input-centered">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                <i class="input-helper"></i>
-                                Accept the license agreement
-                            </label>
+                    <form action="/register" method="post">                    
+                        {{ csrf_field() }}
+                        <div class="form-group form-group--float form-group--centered">
+                            <input type="text" class="form-control" name="name">
+                            <label>ROBLOX Username</label>
+                            <i class="form-group__bar"></i>
                         </div>
-                    </div>
 
-                    <button class="btn btn--light btn--icon m-t-15"><i class="zmdi zmdi-plus"></i></button>
+                        <div class="form-group form-group--float form-group--centered">
+                            <input type="password" class="form-control" name="password">
+                            <label>Password</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+
+                        <div class="form-group form-group--float form-group--centered">
+                            <input type="password" class="form-control" name="password_confirmation">
+                            <label>Password Confirmation</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+
+                        <div class="input-centered">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    <i class="input-helper"></i>
+                                    Accept the license agreement
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn--light btn--icon m-t-15" onclick="$(this).closest('form').submit()"><i class="zmdi zmdi-plus"></i></button>
+                    </form>
                 </div>
             </div>
 
@@ -192,6 +196,7 @@
         <!-- Bootstrap -->
         <script src="/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+        <script src="/vendors/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
             <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
@@ -199,5 +204,16 @@
 
         <!-- Site Functions & Actions -->
         <script src="/js/app.min.js"></script>
+
+        @if (count($errors) > 0)
+            <script type="text/javascript">
+                @foreach ($errors->all() as $error)
+                    $.notify({
+                        message: '{{ $error }}',
+                        type: 'danger'
+                    });
+                @endforeach
+            </script>
+        @endif
     </body>
 </html>
