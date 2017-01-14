@@ -1,8 +1,7 @@
-'use strict';
+var sparklineLine;
 
-$(document).ready(function () {
-    // Function for Sparkline Line Chart
-    function sparklineLine(id, width, height, lineColor, fillColor, lineWidth, maxSpotColor, minSpotColor, spotColor, spotRadius, hSpotColor, hLineColor) {
+(function () {    // Function for Sparkline Line Chart
+    sparklineLine = function(id, width, height, lineColor, fillColor, lineWidth, maxSpotColor, minSpotColor, spotColor, spotRadius, hSpotColor, hLineColor) {
         $('.'+id).sparkline('html', {
             type: 'line',
             width: width,
@@ -28,23 +27,6 @@ $(document).ready(function () {
             barColor: barColor,
             barSpacing: barSpacing
         })
-    }
-
-    //Sample Sparkline Line Chart
-    if ($('.chart-sparkline-line')[0]) {
-        sparklineLine(
-            'chart-sparkline-line',
-            '100%',
-            50,
-            'rgba(255, 255, 255, 0.2)',
-            'rgba(0,0,0,0)', 1.5,
-            '#b4bfc3',
-            '#b4bfc3',
-            '#b4bfc3',
-            4,
-            '#b4bfc3',
-            '#b4bfc3'
-        );
     }
 
     //Sample Sparkline Bar Chart
@@ -96,4 +78,4 @@ $(document).ready(function () {
             sliceColors: ['#b4bfc3', '#edeff0', 'rgba(177, 188, 192, 0.47)', 'rgba(177, 188, 192, 0.1)']
         });
     }
-});
+})();

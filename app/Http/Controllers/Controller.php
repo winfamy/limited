@@ -12,10 +12,8 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function test() {
-        $stamp = \App\Stamp::create([
-            'type' => 'uaid',
-            'object_id' => 12345,
-            'value' => 12345
-        ]);
+        $uaid = \App\Uaid::all()->first();
+        $owners = collect($uaid->history)->sortByDesc('timestamp');
+        dd($owners);
     }
 }

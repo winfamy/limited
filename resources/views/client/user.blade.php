@@ -24,13 +24,51 @@
 
 <div class="tab-content">
     <div id="inventory" class="tab-pane fade in">
-        <div class="row">
 
+
+        <div class="col-sm-4">        
+            <div class="card widget-analytic">
+                <div class="card__header">
+                    <h2>Total RAP <small>Total RAP of Limiteds</small></h2>
+                </div>
+                <div class="card__body">
+                    <div class="widget-analytic__info">
+                        <h2>%rap% R$</h2>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="col-sm-4">        
+            <div class="card widget-analytic">
+                <div class="card__header">
+                    <h2>Total Value <small>Total RBX.Limited Value</small></h2>
+                </div>
+                <div class="card__body">
+                    <div class="widget-analytic__info">
+                        <h2>NaN</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">        
+            <div class="card widget-analytic">
+                <div class="card__header">
+                    <h2>Total Count <small>Total Item Count</small></h2>
+                </div>
+                <div class="card__body">
+                    <div class="widget-analytic__info">
+                        <h2>%count%</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div id="clothing" class="tab-pane fade in">
-        <h2>ok</h2>
+        <h2>To be added.</h2>
     </div>
 </div>
 @endsection

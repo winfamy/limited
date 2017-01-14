@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use App\Library\InventoryHandler as Inventory;
 use App\Stamp;
 
 class Save implements ShouldQueue
@@ -15,14 +16,16 @@ class Save implements ShouldQueue
 
 
     public $items;
+    public $user_id;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(array $items)
+    public function __construct(array $items, $user_id)
     {
         $this->items = $items;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -32,12 +35,6 @@ class Save implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->items as $item) {
-            Stamp::create([
-                'type' => 'uaid',
-                'object_id' => $item['id'],
-                'value' => $item['uaid']
-            ]);
-        }
+        Inventory::save($this->items, $this->user_id);
     }
 }

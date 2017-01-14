@@ -337,7 +337,7 @@
         <!-- Javascript Libraries -->
 
         <!-- jQuery -->
-        <script src="/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
         <!-- Bootstrap -->
         <script src="/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -373,7 +373,7 @@
 
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
-            <script src="/vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+            <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
         <![endif]-->
 
         <!-- Demo Only -->
@@ -386,6 +386,7 @@
 
         <!-- Site Functions & Actions -->
         <script src="/js/app.min.js"></script>
+
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
         <script>  
